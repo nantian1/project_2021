@@ -24,7 +24,7 @@
         </span>
       </el-form-item>
       <el-form-item>
-        <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
+        <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin" @keyup.enter = "keyDown(e)">
           登 录
         </el-button>
       </el-form-item>
@@ -78,6 +78,9 @@ export default {
       immediate: true
     }
   },
+  mounter(){
+    window.addEventListener('keydown',this.keyDown);
+  },
   methods: {
     showPwd() {
       if (this.pwdType === 'password') {
@@ -101,6 +104,12 @@ export default {
           return false
         }
       })
+    },
+    //实现支持点击回车登录
+    keyDown(e){
+      if(e.keyCode == 13 || e.keyCode == 100){
+        handleLogin();
+      }
     }
   }
 }

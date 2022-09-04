@@ -248,6 +248,8 @@ export default {
     openUpdateVideo(videoId) {
       video.getVideoById(videoId).then(response => {
         this.eduVideo = response.data.eduVideo;
+        this.fileList=[{name:response.data.eduVideo.videoOriginalName}];
+        console.info(response.data.eduVideo.videoOriginalName);
         this.dialogVideoFormVisible = true;
       });
     },
