@@ -130,7 +130,7 @@ export default {
       sending: true, //是否发送验证码
       second: 60, //倒计时间
       codeTest: "获取验证码",
-      checkPhone:""
+      checkPhone:""  
     };
     
     

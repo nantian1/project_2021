@@ -241,14 +241,21 @@ export default {
     openAddVideo(chapterId) {
       this.eduVideo = {};
       this.eduVideo.chapterId = chapterId;
-      //this.eduVideo.fileList='';
       this.dialogVideoFormVisible = true;
     },
     //修改小节回显
     openUpdateVideo(videoId) {
       video.getVideoById(videoId).then(response => {
         this.eduVideo = response.data.eduVideo;
-        this.fileList=[{name:response.data.eduVideo.videoOriginalName}];
+        //回显上传文档的列表
+        if(response.data.eduVideo.videoOriginalName){
+          var arrFile = response.data.eduVideo.videoOriginalName.split(",");
+         for(var i = 0;i < arrFile.length; i++){
+           this.fileList.push({
+             name:arrFile[i]
+           })
+         }
+        }
         console.info(response.data.eduVideo.videoOriginalName);
         this.dialogVideoFormVisible = true;
       });
@@ -260,6 +267,7 @@ export default {
         this.updateVideoInfo();
       } else {
         //添加
+        this.fileList=[];
         this.saveVideo();
       }
     },
