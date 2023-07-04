@@ -64,7 +64,7 @@
 
       <el-table-column prop="intro" label="资历"/>
 
-      <el-table-column prop="gmtCreate" label="添加时间" width="160"/>
+      <el-table-column prop="gmtCreate" value-format="yyyy-MM-dd" label="添加时间" width="160"/>
 
       <el-table-column prop="sort" label="排序" width="60"/>
 
@@ -95,6 +95,7 @@
 </template>
 <script>
 import teacher from "@/api/teacher";
+import moment from "moment"
 
 export default {
   //定义页面元素
@@ -104,6 +105,7 @@ export default {
       limit: 10, //每页多少行
       teacherQuery: {}, //查询条件
       list: [], //列表数据
+      datas:[],
       total: 0, //总记录数
       listLoading: false
     };
@@ -112,6 +114,11 @@ export default {
     this.getTeacherPageQuery();
   },
   methods: {
+
+    dateFormat:function(date){
+      return moment(date).format("YYYY-MM-DD")
+    },
+
     //查询
     getTeacherPageQuery(current = 1) {
       this.current = current;
@@ -119,7 +126,13 @@ export default {
         .getTeacherPageVo(this.current, this.limit, this.teacherQuery)
         .then(response => {
           console.log(response);
-          this.list = response.data.list;
+          debugger;
+          this.datas = response.data.list;
+          for(var i = 0;i < this.datas.length;i++){
+            this.datas[i].gmtCreate = this.datas[i].gmtCreate.substr(0,10);
+            this.datas[i].gmtModified = this.datas[i].gmtModified.substr(0,10);
+          }
+          this.list = this.datas;
           this.total = response.data.total;
         });
     },

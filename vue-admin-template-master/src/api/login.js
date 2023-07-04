@@ -25,3 +25,12 @@ export function logout() {
     method: 'post'
   })
 }
+
+
+export function personFace(data) {
+  return request({
+    url: '/face/vef',
+    method: 'post',
+    data
+  })
+}

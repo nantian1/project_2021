@@ -24,8 +24,11 @@
         </span>
       </el-form-item>
       <el-form-item>
-        <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin" @keyup.enter = "keyDown(e)">
-          登 录
+        <el-button :loading="loading" type="primary" style="margin-left:120px;" @click.native.prevent="handleLogin" @keyup.enter = "keyDown(e)">
+          登&nbsp;&nbsp;&nbsp;&nbsp;录
+        </el-button>
+        <el-button type="primary" style="" @click="faceLogin">
+          人脸登录
         </el-button>
       </el-form-item>
       <!-- <div class="tips">
@@ -104,6 +107,20 @@ export default {
           return false
         }
       })
+    },
+    //跳转人脸识别登录界面
+    faceLogin(){
+      console.info('hhh');
+    
+      this.$router.push({
+        path:'/indexFace'
+      });
+
+      //点击跳转至上次浏览页面
+         // this.$router.go(-1)
+
+          //指定跳转地址
+          //this.$router.replace('/indexFace')
     },
     //实现支持点击回车登录
     keyDown(e){
